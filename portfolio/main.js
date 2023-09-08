@@ -64,6 +64,10 @@ function addStar(){
 //array of 200. For each value in the array, call addStar function
 Array(200).fill().forEach(addStar)
 
+//background
+const galaxy = new THREE.TextureLoader().load('/public/images/galaxy.png')
+scene.background = galaxy;
+
 //animate function so I don't have to copy and paste the same renderer function again and again
 function animate(){
   requestAnimationFrame(animate);
