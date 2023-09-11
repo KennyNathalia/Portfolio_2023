@@ -68,6 +68,15 @@ Array(200).fill().forEach(addStar)
 const galaxy = new THREE.TextureLoader().load('/images/galaxy.png')
 scene.background = galaxy;
 
+const kennyTexture = new THREE.TextureLoader().load('/images/kenny.png');
+
+const kenny = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3,),
+  new THREE.MeshBasicMaterial( { map: kennyTexture})
+);
+
+scene.add(kenny);
+
 //animate function so I don't have to copy and paste the same renderer function again and again
 function animate(){
   requestAnimationFrame(animate);
