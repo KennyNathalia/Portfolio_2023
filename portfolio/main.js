@@ -16,8 +16,8 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(10);
-camera.position.setX(-1);
+camera.position.setZ(30);
+camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
@@ -37,15 +37,15 @@ const ambientLight = new THREE.AmbientLight(0xffffff)
 
 scene.add(pointLight, ambientLight)
 
-//helpers
-//shows where the light is shining from
-const lightHelper = new THREE.PointLightHelper(pointLight)
-//displays grid
-const gridHelper = new THREE.GridHelper(200, 50)
-scene.add(lightHelper, gridHelper)
+// //helpers
+// //shows where the light is shining from
+// const lightHelper = new THREE.PointLightHelper(pointLight)
+// //displays grid
+// const gridHelper = new THREE.GridHelper(200, 50)
+// scene.add(lightHelper, gridHelper)
 
-//controls so that I can move the camera around
-const controls = new OrbitControls(camera, renderer.domElement);
+// //controls so that I can move the camera around
+// const controls = new OrbitControls(camera, renderer.domElement);
 
 //adds stars
 function addStar(){
@@ -95,6 +95,9 @@ scene.add(moon);
 moon.position.z = 30;
 moon.position.setX(-10);
 
+kenny.position.z = -5;
+kenny.position.x = 2;
+
 //scroll animation
 function moveCamera(){
   const t = document.body.getBoundingClientRect().top;
@@ -111,6 +114,7 @@ function moveCamera(){
 } 
 
 document.body.onscroll = moveCamera;
+moveCamera();
 
 //animate function so I don't have to copy and paste the same renderer function again and again
 function animate(){
@@ -125,7 +129,7 @@ function animate(){
   moon.rotation.x += 0.005;
   
   //updates control movements
-  controls.update();
+  //controls.update();
 
   renderer.render(scene, camera);
 } 
