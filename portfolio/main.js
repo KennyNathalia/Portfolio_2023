@@ -68,6 +68,7 @@ Array(200).fill().forEach(addStar)
 const galaxy = new THREE.TextureLoader().load('/images/galaxy.png')
 scene.background = galaxy;
 
+//me
 const kennyTexture = new THREE.TextureLoader().load('/images/kenny.png');
 
 const kenny = new THREE.Mesh(
@@ -76,6 +77,16 @@ const kenny = new THREE.Mesh(
 );
 
 scene.add(kenny);
+
+//moon
+const moonTexture = new THREE.TextureLoader().load('/images/moon.jpg');
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.MeshBasicMaterial( { map: moonTexture})
+);
+
+scene.add(moon);
 
 //animate function so I don't have to copy and paste the same renderer function again and again
 function animate(){
