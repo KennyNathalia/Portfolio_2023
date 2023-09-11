@@ -16,8 +16,8 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
-camera.position.setX(-3);
+camera.position.setZ(10);
+camera.position.setX(-1);
 
 renderer.render(scene, camera);
 
@@ -80,13 +80,37 @@ scene.add(kenny);
 
 //moon
 const moonTexture = new THREE.TextureLoader().load('/images/moon.jpg');
+const normalTexture = new THREE.TextureLoader().load('/images/normal.jpg');
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
-  new THREE.MeshBasicMaterial( { map: moonTexture})
+  new THREE.MeshStandardMaterial({
+    map: moonTexture,
+    normalMap: normalTexture,
+  })
 );
 
 scene.add(moon);
+
+moon.position.z = 30;
+moon.position.setX(-10);
+
+//scroll animation
+function moveCamera(){
+  const t = document.body.getBoundingClientRect().top;
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  kenny.rotation.y += 0.01;
+  kenny.rotation.z += 0.01;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.position.y = t * -0.0002;
+} 
+
+document.body.onscroll = moveCamera;
 
 //animate function so I don't have to copy and paste the same renderer function again and again
 function animate(){
@@ -96,6 +120,10 @@ function animate(){
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
 
+  kenny.rotation.y += 0.005;
+
+  moon.rotation.x += 0.005;
+  
   //updates control movements
   controls.update();
 
